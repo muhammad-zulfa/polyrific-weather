@@ -1,0 +1,55 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+.Title{
+  font-size: 1.2rem;
+  @include media-breakpoint-down(sm){
+    font-size: 0.3rem;
+  }
+}
+
+.WeatherContainer{
+  cursor: pointer;
+  min-width: 200px;
+  @include media-breakpoint-down(sm){
+    min-width: 90%;
+    margin-bottom: 1rem;
+  }
+  &:hover{
+    box-shadow:0 1rem 3rem rgba(0,0,0,.175)!important
+  }
+}
+
+.CardHeader{
+  background: #faedd8 !important;
+}
+
+.WeatherTemp{
+  font-size: 1.8rem;
+  align-self: center;
+  font-weight: bold;
+  @include media-breakpoint-down(sm){
+    font-size: 2.5rem;
+  }
+}
+
+.Low{
+  font-weight: normal !important;
+  color: #0070f3;
+  font-size: 1rem;
+  align-self: center;
+}
+
+.Hi{
+  font-weight: normal !important;
+  color: coral;
+  font-size: 1rem;
+  align-self: center;
+}
+
+.WeatherIcon{
+  width: 100px;
+  height: 100px;
+  align-self: center;
+}

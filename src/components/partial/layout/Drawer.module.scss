@@ -1,0 +1,9 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+.DrawerContent{
+  @include media-breakpoint-down(sm){
+    width: 75%;
+  }
+}
