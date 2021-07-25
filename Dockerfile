@@ -19,6 +19,7 @@ COPY package-lock.json /opt/app
 
 # Install Dependencies
 RUN npm ci --no-optional
+RUN npm install eslint babel-eslint -g
 
 # Preparing App Source
 COPY . /opt/app
