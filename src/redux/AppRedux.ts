@@ -1,29 +1,40 @@
 const ActionTypes = {
   SELECT_CITY: "SELECT_CITY",
-  OPEN_WEATHER_DETAIL: "OPEN_WEATHER_DETAIL",
   ADD_NEW_CITY: "ADD_NEW_CITY",
-  CLOSE_WEATHER_DETAIL: "CLOSE_WEATHER_DETAIL",
-  REFRESH_WEATHER_FORECAST: "REFRESH_WEATHER_FORECAST"
+  REFRESH_WEATHER_FORECAST: "REFRESH_WEATHER_FORECAST",
 }
 
-export const openWeatherDetail = (lat: number, lon: number, name: string) => ({
-  type: ActionTypes.OPEN_WEATHER_DETAIL,
+export const selectCity = (lat: number, lon: number, name: string) => ({
+  type: ActionTypes.SELECT_CITY,
   payload: {lat, lon, name}
 })
-export const closeWeatherDetail = () => ({type: ActionTypes.CLOSE_WEATHER_DETAIL})
-export const refreshWeatherForecast = () => ({type: ActionTypes.REFRESH_WEATHER_FORECAST})
+
+export const refreshWeatherForecast = (data: boolean) => ({type: ActionTypes.REFRESH_WEATHER_FORECAST, payload: {data}})
+
+interface cityLists{
+  [index: number]: string
+}
+
+export type AppStateType = { app: {
+    selectedCity: {
+      lat: string,
+      lon: string,
+      name: string
+    },
+    refreshed: boolean,
+    cities: cityLists,
+  }
+}
 
 const INITIAL_STATE = {
-  defaultCurrent: {
+  timeSelected: null,
+  times: [],
+  selectedCity: {
     lat: '18210',
     lon: '311',
     name: 'Bogor'
   },
-  selected: {
-    lat: '18210',
-    lon: '311',
-    name: 'Bogor'
-  },
+  refreshed: false,
   cities: [
     'Bogor',
     'Jakarta Pusat',
@@ -44,18 +55,17 @@ export const AppReducer = (state = INITIAL_STATE, action: { type: string, payloa
         },
         todayShow: true
       }
-    case ActionTypes.CLOSE_WEATHER_DETAIL:
-      return {
-        ...state,
-        todayShow: false,
-        selected: {
-          lat: state.defaultCurrent.lat,
-          lon: state.defaultCurrent.lon,
-          name: state.defaultCurrent.name
-        }
-      }
     case ActionTypes.REFRESH_WEATHER_FORECAST:
-      return state
+      return {...state, refreshed: action.payload.data}
+    // case ActionTypes.STORE_DATA_FIVE_DAYS:
+    //   localStorage.setItem('fiveDaysWeatherSelected',JSON.stringify(action.payload.data))
+    //   localStorage.setItem('test', String(Number(localStorage.getItem('test')) + 1))
+    //   const timeSelected = state.timeSelected
+    //   return {
+    //     ...state,
+    //     times: Object.keys(action.payload.data),
+    //     timeSelected: !timeSelected ? Object.keys(action.payload.data)[0] : timeSelected
+    //   }
     default:
       return state
   }

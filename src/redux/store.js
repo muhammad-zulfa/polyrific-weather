@@ -1,12 +1,14 @@
 import {combineReducers, applyMiddleware, createStore, compose} from 'redux'
 import {AppReducer} from "./AppRedux";
+import {WeatherReducer} from "./WeatherRedux";
 import thunk from "redux-thunk";
 import {createWrapper} from "next-redux-wrapper";
 
 let store;
 
 const rootReducer = combineReducers({
-  app: AppReducer
+  app: AppReducer,
+  weather: WeatherReducer
 })
 
 const composeEnhancers =

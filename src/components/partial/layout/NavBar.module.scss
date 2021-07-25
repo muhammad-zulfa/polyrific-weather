@@ -1,0 +1,33 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/breakpoints";
+
+.Title{
+  @media (max-width: 409px) {
+    font-size: 1rem;
+  }
+  @media (max-width: 335px) {
+    font-size: 1rem;
+  }
+  @media (max-width: 290px) {
+    font-size: 0.8rem;
+  }
+}
+.CloseWeatherButton{
+  span{
+    display: inherit;
+  }
+  @media (max-width: 370px) {
+    span{
+      display: none;
+    }
+    &::after{
+      content: 'X';
+    }
+  }
+  @media (max-width: 290px) {
+    font-size: 12px;
+    padding: 0 5px;
+    margin-right: 5px !important;
+  }
+}

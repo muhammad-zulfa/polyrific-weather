@@ -4,8 +4,11 @@
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
+
 $bg-main: #f1f1ec;
-$textbrand: "helvetica";
+$textbrand: "Comic Sans MS", sans-serif;
+
+@import "./footer";
 
 .pointer-cursor{
   cursor: pointer;
@@ -16,5 +19,7 @@ body, html{
 }
 
 .text-brand{
-  font-family: "Comic Sans MS", sans-serif;
+  font-family: $textbrand
 }
+
+
