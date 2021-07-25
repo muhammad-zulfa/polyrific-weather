@@ -19,6 +19,7 @@ COPY package-lock.json /opt/app
 
 # Install Dependencies
 RUN npm ci --no-optional
+RUN npm install --save-dev eslint eslint-config-next
 
 # Preparing App Source
 COPY . /opt/app
