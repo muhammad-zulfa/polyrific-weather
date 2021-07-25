@@ -2,7 +2,7 @@
   "containerDefinitions": [
     {
       "name": "polyrific-weather",
-      "image": "023093241977.dkr.ecr.ap-southeast-1.amazonaws.com/polyrific-weather",
+      "image": "public.ecr.aws/v7d5p2t5/polyrific-weather",
       "cpu": 0,
       "memoryReservation": 128,
       "portMappings": [

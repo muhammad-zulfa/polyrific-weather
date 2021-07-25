@@ -21,7 +21,7 @@ const bindMiddleware = (middleware) => {
     const { composeWithDevTools } = require('redux-devtools-extension');
     return composeWithDevTools(applyMiddleware(...middleware));
   }
-  return composeEnhancers(applyMiddleware(...middleware));
+  return compose(applyMiddleware(...middleware));
 }
 
 const createDefStore = (emptyState = {}) => {
