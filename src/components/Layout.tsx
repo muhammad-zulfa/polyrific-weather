@@ -5,10 +5,11 @@ import Footer from "./partial/layout/Footer";
 import Drawer from "./partial/layout/Drawer";
 import {WeatherHero} from "./core/weather-hero/WeatherHero";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType, refreshWeatherForecast} from "../redux/AppRedux";
+import {refreshWeatherForecast} from "../redux/AppRedux";
 import {storeDataFiveDays, closeWeatherDetail} from "../redux/WeatherRedux"
 import {fiveDaysWeatherMapper} from "../libs/utils"
 import moment from 'moment'
+import {WeatherStateType} from "../redux/dataModel";
 
 type Props = {
     children?: React.ReactNode,
@@ -18,7 +19,7 @@ type Props = {
 
 export function Layout({children, selectedCity, refresh}: Props){
   const dispatch = useDispatch();
-  const timeSelected = useSelector((state) => state.weather.timeSelected)
+  const timeSelected = useSelector((state: WeatherStateType) => state.weather.timeSelected)
 
   const [showDrawer, setShowDrawer] = useState(false);
   const [{ data, loading, error }, fetchData, cancelRequest] = useHttp({}, { manual: true });

@@ -3,6 +3,7 @@ import styles from './WeatherHero.module.scss';
 import {HumidityIcon, WindIcon} from '../../partial/icons'
 import {getMaxMinTemp} from "../../../libs/utils";
 import {useSelector} from "react-redux";
+import {WeatherDataType, WeatherStateType} from "../../../redux/dataModel";
 
 interface IWeatherHero{
   selectedDate: string,
@@ -13,19 +14,21 @@ interface IWeatherHero{
 
 export const WeatherHero: React.FunctionComponent<IWeatherHero> = ({cityName, countryId, selectedDate, children}) => {
   const [activeTimeline, setActiveTimeline] = useState(0);
-  const [data, setData] = useState([])
+  const [data, setData] = useState<WeatherDataType[]>([])
   const [temp, setTemp] = useState({max: 0, min: 0})
   const [dayOrNight, setDayOrNight] = useState("d");
-  const weatherData = useSelector((state) => state.weather.data)
+  const weatherData = useSelector((state: WeatherStateType) => state.weather.data)
 
   useEffect(() => {
     if(selectedDate != null) {
-      setData(weatherData[selectedDate])
-      const maxMin = getMaxMinTemp(weatherData[selectedDate])
+      // @ts-ignore
+      const selectedWeatherData = weatherData[selectedDate]
+      setData(selectedWeatherData)
+      const maxMin = getMaxMinTemp(selectedWeatherData)
       setTemp(maxMin)
       setActiveTimeline(0)
-      if(weatherData[selectedDate]) {
-        const time = weatherData[selectedDate][0].dt_txt.split(" ")[1].split(':')[0];
+      if(selectedWeatherData) {
+        const time = selectedWeatherData[0].dt_txt.split(" ")[1].split(':')[0];
         if (time >= 18 || time < 6) {
           setDayOrNight("n")
         } else {
@@ -37,6 +40,7 @@ export const WeatherHero: React.FunctionComponent<IWeatherHero> = ({cityName, co
 
   const RenderIcon = () => {
     if(data[activeTimeline] && data[activeTimeline].weather.length > 0){
+      // eslint-disable-next-line @next/next/no-img-element
       return (<img className={styles.WeatherIcon} src={`https://openweathermap.org/img/wn/${data[activeTimeline].weather[0].icon.substring(0,2)+dayOrNight}@2x.png`} />)
     }else{
       return null;
@@ -46,7 +50,7 @@ export const WeatherHero: React.FunctionComponent<IWeatherHero> = ({cityName, co
   const setTimeline = (value: number) => {
     const d = [...data]
     if(d[value]) {
-      const time = d[value].dt_txt.split(" ")[1].split(':')[0];
+      const time = Number(d[value].dt_txt.split(" ")[1].split(':')[0]);
       if (time >= 18 || time < 6) {
         setDayOrNight("n")
       } else {
@@ -65,6 +69,7 @@ export const WeatherHero: React.FunctionComponent<IWeatherHero> = ({cityName, co
             <div className="position-relative d-flex justify-content-between text-white">
               <div className="d-flex flex-column" aria-live="assertive" aria-label="Loading Content...">
               </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className={styles.WeatherIcon} src="https://openweathermap.org/img/wn/01n@2x.png" />
               <div className="position-absolute align-self-end end-0 mb-3" aria-live="assertive" aria-label="Loading Content...">
                 18&#176;/30&#176; C

@@ -3,7 +3,7 @@ import Link from "next/link"
 import {BurgerIcon} from "../icons"
 import styles from './NavBar.module.scss'
 import {useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/AppRedux";
+import {WeatherStateType} from "../../../redux/dataModel";
 
 type PropsType = {
   openDrawer: () => void,
@@ -14,7 +14,7 @@ type PropsType = {
 
 
 export function NavBar({openDrawer, day, city, closeWeatherDetail}: PropsType){
-  const closeButton = useSelector((state: AppStateType) => state.weather.todayShow)
+  const closeButton = useSelector((state: WeatherStateType) => state.weather.todayShow)
   return (
     <div className="navbar navbar-light navbar-expand text-white">
       <div className="container">
