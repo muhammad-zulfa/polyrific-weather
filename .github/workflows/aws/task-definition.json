@@ -1,0 +1,27 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "polyrific-weather",
+      "image": "023093241977.dkr.ecr.ap-southeast-1.amazonaws.com/polyrific-weather",
+      "cpu": 0,
+      "memoryReservation": 128,
+      "portMappings": [
+        {
+          "containerPort": 3001,
+          "hostPort": 0,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": []
+    }
+  ],
+  "family": "frontend-task-def",
+  "volumes": [],
+  "placementConstraints": [],
+  "requiresCompatibilities": [
+    "EC2"
+  ]
+}
