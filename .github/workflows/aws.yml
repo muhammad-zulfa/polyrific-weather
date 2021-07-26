@@ -51,6 +51,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: polyrific-service
+          service: polyrivic-service
           cluster: zio-cluster
           wait-for-service-stability: false
